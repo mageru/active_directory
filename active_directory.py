@@ -82,6 +82,8 @@ Many thanks, obviously to Mark Hammond for creating
 the pywin32 extensions without which this wouldn't
 have been possible.
 """
+from __future__ import absolute_import
+from __future__ import print_function
 from __active_directory_version__ import __VERSION__, __RELEASE__
 
 import os, sys
@@ -89,13 +91,16 @@ import datetime
 import logging
 import re
 import struct
+import six
+from six.moves import range
+from six.moves import zip
 
 try:
-    basestring
+    six.string_types
 except NameError:
-    basestring = str
+    six.string_types = str
 try:
-    u = unicode
+    u = six.text_type
 except NameError:
     u = str
 
@@ -156,10 +161,10 @@ class Enum(object):
             raise AttributeError
 
     def item_names(self):
-        return self._name_map.items()
+        return list(self._name_map.items())
 
     def item_numbers(self):
-        return self._number_map.items()
+        return list(self._number_map.items())
 
 GROUP_TYPES = Enum(
     GLOBAL_GROUP=0x00000002,
@@ -1215,7 +1220,7 @@ def AD_object(obj_or_path=None, path="", username=None, password=None, interface
     """
     if path and not obj_or_path:
         obj_or_path = path
-    if isinstance(obj_or_path, basestring):
+    if isinstance(obj_or_path, six.string_types):
         obj = open_object(obj_or_path, username, password, interface=interface)
     else:
         obj = obj_or_path
@@ -1310,4 +1315,4 @@ def search_ex(query_string=""):
 if __name__ == '__main__':
     logger.addHandler(logging.StreamHandler())
     logger.setLevel(logging.DEBUG)
-    print(find_user())
+    print((find_user()))

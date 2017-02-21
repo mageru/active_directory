@@ -4,6 +4,7 @@ any future connection to the same server / domain with the same
 same flags can simply use the username with a NULL password. This
 does not, however, appear to work.
 """
+from __future__ import absolute_import
 import os, sys
 import unittest
 

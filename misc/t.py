@@ -1,4 +1,6 @@
+from __future__ import absolute_import
 import unittest
+from six.moves import zip
 
 class DisjointError(Exception):
     pass

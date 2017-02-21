@@ -1,4 +1,5 @@
 # -*- coding: UTF8 -*-
+from __future__ import absolute_import
 from distutils.core import setup
 import __active_directory_version__ as __version__
 

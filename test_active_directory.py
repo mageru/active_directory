@@ -1,7 +1,9 @@
 # -*- coding: UTF-8 -*-
+from __future__ import absolute_import
 import os, sys
+from six.moves import range
 try:
-    import ConfigParser
+    import six.moves.configparser
 except ImportError:
     import configparser as ConfigParser
 import filecmp
@@ -20,10 +22,10 @@ import win32net
 
 import active_directory
 
-ini = ConfigParser.ConfigParser()
+ini = six.moves.configparser.ConfigParser()
 ini.read("testing_config.ini")
 
-def get_config(section, item, function=ConfigParser.ConfigParser.get):
+def get_config(section, item, function=six.moves.configparser.ConfigParser.get):
     if ini.has_option(section, item):
         return function(ini, section, item)
     else:
